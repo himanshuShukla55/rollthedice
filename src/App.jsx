@@ -1,5 +1,6 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
+import {trigger} from 'react-native-haptic-feedback';
 
 //images
 import DiceOne from '../assets/One.png';
@@ -17,6 +18,13 @@ const Dice = ({imageUrl}) => {
     </View>
   );
 };
+
+// Optional configuration
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
+
 const App = () => {
   const [diceImage, setDiceImage] = useState(DiceOne);
 
@@ -45,6 +53,8 @@ const App = () => {
       default:
         setDiceImage(DiceOne);
     }
+    // Trigger haptic feedback
+    trigger('impactLight', options);
   };
   return (
     <View style={styles.container}>
